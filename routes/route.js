@@ -1,12 +1,12 @@
 const root = require('./root');
-const user = require('./user');
+const admin = require('./admin');
 module.exports = (app) => {
 
       //index
       app.get('/',root);
 
       //user
-      app.use('/users',user);
+      app.use('/admins',admin);
 
       //fallback
       app.all('*', (req, res, next) => {
