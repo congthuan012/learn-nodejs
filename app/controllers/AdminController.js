@@ -1,5 +1,7 @@
 const Admin = require('../models/Admin');
 const storeUserRequest = require('../requests/StoreUserRequest');
+const bcrypt = require('bcrypt');
+
 const AdminController = {
       index: async (req, res, next) => {
             try{
@@ -22,6 +24,7 @@ const AdminController = {
 
             try{
 
+
                   //check duplicates username
                   const duplicate = await Admin.findOne({username});
 
@@ -29,10 +32,14 @@ const AdminController = {
                         return res.status(409).json({message: 'Username already exists'});
                   }
 
+                  const salt = bcrypt.genSaltSync(10);
+
+                  const hashPassword = await bcrypt.hash(password,salt)
+
                   const admin = await Admin.create({
                         username,
                         email,
-                        password,
+                        password:hashPassword,
                         full_name,
                         user_number
                   });

@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const mongooseDelete = require('mongoose-delete');
+// const mongooseDelete = require('mongoose-delete');
 
 const AdminSchema = new mongoose.Schema({
       username: {
@@ -31,8 +31,8 @@ const AdminSchema = new mongoose.Schema({
       timestamps: true
 });
 
-AdminSchema.plugin(mongooseDelete,{
-      deletedAt: true,
-});
+// AdminSchema.plugin(mongooseDelete,{
+//       deletedAt: true,
+// });
 
 module.exports = mongoose.model('Admin', AdminSchema);
